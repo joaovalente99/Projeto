@@ -26,7 +26,7 @@ public class Planet implements Constantes{
     }
 
     private void inicializa() {
-        tipoRecurso = (int) (Math.random() * 4) + 1;
+        tipoRecurso = (int) (Math.random() * 4) + 1; //calcula que recursos é que tem neste planeta
         if(tipoRecurso == 1) { //Se calhar preto
             black = 1;
             blue = 1;

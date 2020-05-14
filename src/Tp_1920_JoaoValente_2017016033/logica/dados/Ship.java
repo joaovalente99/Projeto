@@ -15,7 +15,7 @@ public abstract class Ship implements Constantes {
         officers = Officer.CARGO_HOLD;
         this.weapon = weapon;
         this.fuel = fuel;
-        black = blue = red = green = 30;
+        black = blue = red = green = 0;
         cargoHoldLevel = 0;
         drone = new Drone();
         this.shield = shield;
@@ -204,7 +204,7 @@ public abstract class Ship implements Constantes {
     public void caiBuracoNegro() {
         int aux = shield;
 
-        if(officers == Officer.CAPTAIN || officers == Officer.NAVIGATION || officers == Officer.LANDING_PARTY) {
+        if(officers == Officer.CAPTAIN || officers == Officer.NAVIGATION || officers == Officer.LANDING_PARTY) { //caso nao tenha shield officer
             fuel--;
             aux -= 2;
         }
@@ -303,8 +303,8 @@ public abstract class Ship implements Constantes {
     }
 
     public String cargoLoss() {
-        int ind = (int) (Math.random() * 4) + 1;
-        int quant = (int) (Math.random() * 3) + 1;
+        int ind = (int) (Math.random() * 4) + 1; //Calcula qual cargo ira perder
+        int quant = (int) (Math.random() * 3) + 1; //Calcula a qunatidade de cargo que ira perder
         if(officers == Officer.CAPTAIN || officers == Officer.NAVIGATION || officers == Officer.LANDING_PARTY)
             quant *= 2;
         if(ind == 1) {

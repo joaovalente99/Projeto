@@ -69,40 +69,40 @@ public class JogoDados implements Constantes {
             ship = new MiningShip();
         else
             ship = new MilitaryShip();
-        contEvent = 0;
+        contEvent = 1;
     }
 
     public int exploracao() {
-        int ind = (int) (Math.random() * 8) + 1;
-        if(ind == 1) {
+        int ind = (int) (Math.random() * 8) + 1; //calcular probabilidade de cair num buraco negro (1/8)
+        if(ind == 1) { //caso calhe
             ship.caiBuracoNegro();
             addMsgLog("Caiu num buraco negro.");
         }
-        else
+        else  //se nao, apenas gasta combustivel normalmente
             ship.gastaCombustivel();
-        if(ship.getOfficers() == Officer.DEATH) {
+        if(ship.getOfficers() == Officer.DEATH) { //Caso tenha ficado sem officers
             addMsgLog("Ficou sem membros da equipa.");
             return CREW_FINISH;
         }
-        if(ship.getFuel() <= 0) {
+        if(ship.getFuel() <= 0) { //caso ficou sem combustivel
             addMsgLog("Ficou sem combustivel.");
             return COMBUSTIVEL_ESGOTADO;
         }
 
-        if(contEvent-- == 0) {
+        if(--contEvent == 0) { //caiu no evento
             addMsgLog("Caiu num evento.");
             contEvent = 1;
             return CAI_EVENTO;
         }
 
-        ind = (int) (Math.random() * 10) + 1;
-        if(ind < 3) {
+        ind = (int) (Math.random() * 10) + 1; //calcular probabilidade de cair num planeta com space station (3/10)
+        if(ind < 3) { //caso tenha calhado
             addMsgLog("Calhou num sitio com space station.");
             tipoCirculo = 1;
             contUpg = 1;
             return CIRCULO_VERMELHO;
         }
-        else {
+        else {  //caso nao tenha calado num
             tipoCirculo = 0;
             return CIRCULO_BRANCO;
         }
@@ -121,9 +121,9 @@ public class JogoDados implements Constantes {
     }
 
     public void converteRecursos(int opcao) {
-        if(ship.getOfficers() != Officer.CARGO_HOLD)
+        if(ship.getOfficers() != Officer.CARGO_HOLD)  //So converte recursos se tiver Cargo Holder
             addMsgLog("Sem Cargo hold Officer para realizar trocas.");
-        else if(opcao == 1) {
+        else if(opcao == 1) { //As funçoes abaixo falam por si
             if(ship.transformarEnergyShield() == false)
                 addMsgLog("Recursos insuficientes para a transformacao");
         }
@@ -138,37 +138,37 @@ public class JogoDados implements Constantes {
     }
 
     public void caiEvento() {
-        int ind = (int) (Math.random() * 6) + 1;
-        if(ind == 1) {
+        int ind = (int) (Math.random() * 6) + 1; //Calcula qual evento calhou, cada numero, numero do evento especifico
+        if(ind == 1) { //morre um tripulante, caso nao tenha shield officer ou weapon officer, morrem 2
             if(ship.getOfficers() == Officer.CAPTAIN || ship.getOfficers() == Officer.NAVIGATION || ship.getOfficers() == Officer.LANDING_PARTY)
                 ship.crewDeath();
             ship.crewDeath();
             addMsgLog("[Evento 1] Um membro da equipa morreu.");
         }
-        else if(ind == 2) {
+        else if(ind == 2) { //encontram recursos perdidos
             String msg = ship.salvageShip();
             addMsgLog("[Evento 2] Aumentou os seus recursos em + " + msg + ".");
         }
-        else if(ind == 3) {
+        else if(ind == 3) { //perdem recursos
             String msg = ship.cargoLoss();
             addMsgLog("[Evento 3] Perdeu os seguintes recursos: " + msg + ".");
         }
-        else if(ind == 4) {
+        else if(ind == 4) { //perde combustivel, caso nao tenha weapon ou shield officers, perde o dobro
             if(ship.getOfficers() == Officer.CAPTAIN || ship.getOfficers() == Officer.NAVIGATION || ship.getOfficers() == Officer.LANDING_PARTY)
                 ship.gastaCombustivel();
             ship.gastaCombustivel();
             addMsgLog("[Evento 4] Perdeu combustivel.");
         }
-        else if(ind == 5)
+        else if(ind == 5) //nao caiu em nenhum evento
             addMsgLog("[Evento 5] Nao caiu em nenhum evento.");
-        else if(ind == 6) {
+        else if(ind == 6) { //encontrou novo tripulante
             ship.crewRescue();
             addMsgLog("[Evento 6] Encontrou um membro da equipa.");
         }
 
     }
 
-    public void caiEvento(int ind) {
+    public void caiEvento(int ind) { //mesma coisa que em cima mas nao calcula de forma random
         if(ind == 1) {
             ship.crewDeath();
             addMsgLog("[Evento 1] Um membro da equipa morreu.");
@@ -206,8 +206,8 @@ public class JogoDados implements Constantes {
     }
 
     public void realizaUpgrades(int num1, int num2, int num3) {
-        if(num1 == 1) {
-            if(contUpg == 1) {
+        if(num1 == 1) { //realiza upgrade ao cargo hold
+            if(contUpg == 1) { //verifica se ja realizou upgrade nesta space station
                 if(ship.upgradeCargoHold() == false)
                     addMsgLog("Level maximo atingido, recursos insuficientes ou sem Cargo hold Officer.");
                 else {
@@ -218,7 +218,7 @@ public class JogoDados implements Constantes {
             else
                 addMsgLog("Ja fez um upgrade do cargo hold nesta space station, dirija-se a outra para um novo upgrade.");
         }
-        else if(num1 == 2) {
+        else if(num1 == 2) { //troca recursos
             int msg = ship.trocaRecursos(num2, num3);
             if(msg == RECURSOS_INSUFICIENTES)
                 addMsgLog("Recursos insuficientes para efetuar a troca.");
@@ -227,7 +227,7 @@ public class JogoDados implements Constantes {
             else
                 addMsgLog("Troca de recursos efetuada com sucesso.");
         }
-        else if(num1 == 3) {
+        else if(num1 == 3) { //Compra tripulante
             int msg = ship.compraCrew();
             if(msg == RECURSOS_INSUFICIENTES)
                 addMsgLog("Recursos insuficientes para a compra.");
@@ -236,7 +236,7 @@ public class JogoDados implements Constantes {
             else
                 addMsgLog("Contratacao de membro efetuada com sucesso.");
         }
-        else if(num1 == 4) {
+        else if(num1 == 4) { //Compra armadura para o drone
             int msg = ship.droneArmor();
             if(msg == RECURSOS_INSUFICIENTES)
                 addMsgLog("Recursos insuficientes para a compra.");
@@ -245,7 +245,7 @@ public class JogoDados implements Constantes {
             else
                 addMsgLog("Aumento de armor realizado com sucesso.");
         }
-        else if(num1 == 5) {
+        else if(num1 == 5) { //compra um drone
             int msg = ship.comprarDrone();
             if(msg == RECURSOS_INSUFICIENTES)
                 addMsgLog("Recursos insuficientes para a compra.");
@@ -254,7 +254,7 @@ public class JogoDados implements Constantes {
             else
                 addMsgLog("Drone comprado com sucesso.");
         }
-        else if(num1 == 6 && ship instanceof MilitaryShip) {
+        else if(num1 == 6 && ship instanceof MilitaryShip) { //caso seja military ship, realiza upgrade para as weapons
             int msg = ship.upgradeWeapon();
             if(msg == RECURSOS_INSUFICIENTES)
                 addMsgLog("Recursos insuficientes para a compra.");
@@ -267,31 +267,31 @@ public class JogoDados implements Constantes {
     }
 
     public int trocaTurno() {
-        if(alien == null) {
-            if(turnosAlien-- == 0) {
+        if(alien == null) { //caso nao tenha alien
+            if(turnosAlien-- == 0) { //calcula os turnos que faltam para voltar a nascer
                 alienRespawn();
                 addMsgLog("Um novo alien nasceu.");
             }
         }
-        if(temRecurso == 0) {
-            if (ship.getDrone().getX() != planet.getxR()) {
-                if(ship.getDrone().getX() < planet.getxR())
+        if(temRecurso == 0) { //Caso nao tenha recurso vai à procura dele
+            if (ship.getDrone().getX() != planet.getxR()) { //caso nao esteja na mesma linha
+                if(ship.getDrone().getX() < planet.getxR()) //caso x seja menor avanca
                     ship.getDrone().avancaX();
                 else
                     ship.getDrone().recuaX();
             }
-            else {
-                if(ship.getDrone().getY() < planet.getyR())
+            else { //caso esteja na mesma linha, faz os calculos para o y
+                if(ship.getDrone().getY() < planet.getyR()) //caso seja menor avanca
                     ship.getDrone().avancaY();
                 else
                     ship.getDrone().recuaY();
             }
-            if(ship.getDrone().getX() == planet.getxR() && ship.getDrone().getY() == planet.getyR()) {
+            if(ship.getDrone().getX() == planet.getxR() && ship.getDrone().getY() == planet.getyR()) { //caso apanhe o recurso
                 addMsgLog("Apanhou o recurso.");
                 temRecurso = 1;
             }
         }
-        else {
+        else { //caso tenha o recurso faz o mesmo dito em cima mas para a nave
             if (ship.getDrone().getX() != planet.getxL()) {
                 if(ship.getDrone().getX() < planet.getxL())
                     ship.getDrone().avancaX();
@@ -310,7 +310,7 @@ public class JogoDados implements Constantes {
                 return SUCESSO_SAQUE;
             }
         }
-        if(alien != null) {
+        if(alien != null) { //caso haja um alien faz o mesmo em cima mas atras do drone
             if (alien.getX() != ship.getDrone().getX()) {
                 if (alien.getX() < ship.getDrone().getX())
                     alien.avancaX();
@@ -322,12 +322,12 @@ public class JogoDados implements Constantes {
                 else
                     alien.recuaY();
             }
-
+            //calcula a distancia do drone (formula matematica)
             int dis = (int) Math.sqrt(((alien.getX() - ship.getDrone().getX()) * (alien.getX() - ship.getDrone().getX())) +
                     ((alien.getY() - ship.getDrone().getY()) * (alien.getY() - ship.getDrone().getY())));
-            if (dis <= 1) {
+            if (dis <= 1) {  //caso esteja a 1 quadricula de distancia
                 addMsgLog("Entrou na batalha com o alien.");
-                int msg = fight();
+                int msg = fight(); //entrou em batalha
                 if (msg == VITORIA_ALIEN) {
                     addMsgLog("Drone destruido.");
                     return VITORIA_ALIEN;
@@ -345,18 +345,18 @@ public class JogoDados implements Constantes {
         boolean sair = false;
 
         while(!sair) {
-            int num = (int) (Math.random() * 6) + 1;
-            if(alien.defense(num) == MORTE) {
+            int num = (int) (Math.random() * 6) + 1; //roda o dado para o ataque do drone
+            if(alien.defense(num) == MORTE) { //alien morre
                 alien = null;
-                turnosAlien = (int) (Math.random() * 6) + 1;
+                turnosAlien = (int) (Math.random() * 6) + 1; //tempo ate nascer novo alien
                 addMsgLog("Alien vai nascer em " + turnosAlien + " turnos.");
                 return VITORIA_DRONE;
             }
-            num = (int) (Math.random() * 6) + 1;
-            if(alien.atack(num) == ATAQUE_SUCESSO) {
-                ship.getDrone().recebeDano();
+            num = (int) (Math.random() * 6) + 1; //roda o dado para o ataque do alien
+            if(alien.atack(num) == ATAQUE_SUCESSO) { //acertou o ataque
+                ship.getDrone().recebeDano();  //drone recebe dano
                 if(ship.getDrone().getArmor() == 0) {
-                    ship.setDrone(null);
+                    ship.setDrone(null);  //caso o drone seja destruido
                     return VITORIA_ALIEN;
                 }
             }
@@ -365,8 +365,8 @@ public class JogoDados implements Constantes {
     }
 
     private void alienRespawn() {
-        int num = (int) (Math.random() * 4) + 1;
-        int x = (int) (Math.random() * 6) + 1;
+        int num = (int) (Math.random() * 4) + 1; //qual alien ira nascer
+        int x = (int) (Math.random() * 6) + 1;  //coordenadas onde ira nascer
         int y = (int) (Math.random() * 6) + 1;
         if(num == 1)
             alien = new BlackAlien(x, y);
@@ -387,8 +387,18 @@ public class JogoDados implements Constantes {
             addMsgLog("Sem landing party officer para explorar.");
             return 0;
         }
-        if(planet == null)
+        if(planet == null) {
             planet = new Planet();
+            int z = planet.getTipoRecurso();
+            if(z == 1)
+                addMsgLog("Calhou num planeta do tipo Black");
+            else if(z == 2)
+                addMsgLog("Calhou num planeta do tipo Red");
+            else if(z == 3)
+                addMsgLog("Calhou num planeta do tipo Blue");
+            else
+                addMsgLog("Calhou num planeta do tipo Green");
+        }
         int msg = planet.renova();
         if(msg == PLANETA_VAZIO) {
             addMsgLog("Planeta sem mais recursos para explorar.");
@@ -411,7 +421,7 @@ public class JogoDados implements Constantes {
     }
 
     public int recompensaDada() {
-        int num = (int) (Math.random() * 6) + 1;
+        int num = (int) (Math.random() * 6) + 1; //calcula quantos recursos ira receber
         if(planet.getPremio() == 1) {
             ship.setBlack(ship.getBlack() + num);
             addMsgLog("Encontrou " + num + " black.");

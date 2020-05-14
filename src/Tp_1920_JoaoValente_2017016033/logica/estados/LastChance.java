@@ -11,7 +11,7 @@ public class LastChance extends EstadoAdapter{
     @Override
     public IEstado trocaMilagrosa(int value) {
         jogo.trocaMilagrosa(value);
-        jogo.setPlanet(null);
+        //jogo.setPlanet(null);
         jogo.setAlien(null);
         return new SpaceTravel(jogo);
     }

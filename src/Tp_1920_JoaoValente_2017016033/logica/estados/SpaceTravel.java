@@ -13,7 +13,7 @@ public class SpaceTravel extends EstadoAdapter implements Constantes {
     public IEstado continuarExplorar() {
         int ind = jogo.exploracao();
         if(ind == COMBUSTIVEL_ESGOTADO) {
-            if(jogo.lastChance() == false)
+            if(!jogo.lastChance())
                 return new GameOver(jogo);
             else
                 return new LastChance(jogo);
