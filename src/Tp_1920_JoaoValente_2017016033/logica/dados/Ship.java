@@ -437,17 +437,39 @@ public abstract class Ship implements Constantes {
 
     @Override
     public String toString() {
-        return "Ship{" +
-                "weapon=" + weapon +
-                ", fuel=" + fuel +
-                ", shield=" + shield +
-                ", cargoHoldLevel=" + cargoHoldLevel +
-                ", black=" + black +
-                ", blue=" + blue +
-                ", red=" + red +
-                ", green=" + green +
-                ", officers=" + officers +
-                '}';
+        String str = "";
+        str += "Weapon: " + weapon + "\n";
+        str += "Fuel: " + fuel + "\n";
+        str += "Shield: " + shield + "\n";
+        str += "Nivel de Cargo Hold: " + cargoHoldLevel + "\n";
+        str += "\n" + "Numero de recursos:\n";
+        str += "Black: " + black + "\n";
+        str += "Blue: " + blue + "\n";
+        str += "Red: " + red + "\n";
+        str += "Green: " + green + "\n";
+        str += "Artefactos encontrados: " + artefact + "\n";
+        str += "\nOfficers na nave:\n";
+        switch (officers) {
+            case CAPTAIN:
+                str += "Captain\n";
+                break;
+            case NAVIGATION:
+                str += "Captain\nNavigation\n";
+                break;
+            case LANDING_PARTY:
+                str += "Captain\nNavigation\nLanding Party\n";
+                break;
+            case SHIELDS:
+                str += "Captain\nNavigation\nLanding Party\nShield\n";
+                break;
+            case WEAPONS:
+                str += "Captain\nNavigation\nLanding Party\nShield\nWeapon\n";
+                break;
+            case CARGO_HOLD:
+                str += "Captain\nNavigation\nLanding Party\nShield\nWeapon\nCargo Hold\n";
+                break;
+        }
+        return str;
     }
 
     public abstract boolean upgradeCargoHold();

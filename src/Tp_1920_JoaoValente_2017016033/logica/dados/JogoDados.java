@@ -80,6 +80,7 @@ public class JogoDados implements Constantes {
         }
         else  //se nao, apenas gasta combustivel normalmente
             ship.gastaCombustivel();
+
         if(ship.getOfficers() == Officer.DEATH) { //Caso tenha ficado sem officers
             addMsgLog("Ficou sem membros da equipa.");
             return CREW_FINISH;
@@ -94,18 +95,7 @@ public class JogoDados implements Constantes {
             contEvent = 1;
             return CAI_EVENTO;
         }
-
-        ind = (int) (Math.random() * 10) + 1; //calcular probabilidade de cair num planeta com space station (3/10)
-        if(ind < 3) { //caso tenha calhado
-            addMsgLog("Calhou num sitio com space station.");
-            tipoCirculo = 1;
-            contUpg = 1;
-            return CIRCULO_VERMELHO;
-        }
-        else {  //caso nao tenha calado num
-            tipoCirculo = 0;
-            return CIRCULO_BRANCO;
-        }
+        return 0;
     }
 
     public void clearMsgLog() {
@@ -119,6 +109,19 @@ public class JogoDados implements Constantes {
     public List<String> getMsgLog() {
         return msgLog;
     }
+
+    public String getMsgLogEsp() {
+        String str = "";
+        if(msgLog.size() < 0) {
+            return "Sem logs\n";
+        }
+        for (int i = 0; i < msgLog.size(); i++) {
+            str += msgLog.get(i) + "\n";
+        }
+        clearMsgLog();
+        return str;
+    }
+
 
     public void converteRecursos(int opcao) {
         if(ship.getOfficers() != Officer.CARGO_HOLD)  //So converte recursos se tiver Cargo Holder
@@ -165,6 +168,22 @@ public class JogoDados implements Constantes {
             ship.crewRescue();
             addMsgLog("[Evento 6] Encontrou um membro da equipa.");
         }
+        ind = (int) (Math.random() * 8) + 1; //calcular probabilidade de cair num buraco negro (1/8)
+        if(ind == 1) { //caso calhe
+            ship.caiBuracoNegro();
+            addMsgLog("Caiu num buraco negro.");
+        }
+        else  //se nao, apenas gasta combustivel normalmente
+            ship.gastaCombustivel();
+
+        ind = (int) (Math.random() * 10) + 1; //calcular probabilidade de cair num planeta com space station (3/10)
+        if(ind < 3) { //caso tenha calhado
+            addMsgLog("Calhou num sitio com space station.");
+            tipoCirculo = 1;
+            contUpg = 1;
+        }
+        else  //caso nao tenha calado num
+            tipoCirculo = 0;
 
     }
 
@@ -193,16 +212,36 @@ public class JogoDados implements Constantes {
         }
         else
             addMsgLog("Evento inexistente.");
+
+        ind = (int) (Math.random() * 8) + 1; //calcular probabilidade de cair num buraco negro (1/8)
+        if(ind == 1) { //caso calhe
+            ship.caiBuracoNegro();
+            addMsgLog("Caiu num buraco negro.");
+        }
+        else  //se nao, apenas gasta combustivel normalmente
+            ship.gastaCombustivel();
+
+        ind = (int) (Math.random() * 10) + 1; //calcular probabilidade de cair num planeta com space station (3/10)
+        if(ind < 3) { //caso tenha calhado
+            addMsgLog("Calhou num sitio com space station.");
+            tipoCirculo = 1;
+            contUpg = 1;
+        }
+        else  //caso nao tenha calado num
+            tipoCirculo = 0;
     }
 
     @Override
     public String toString() {
-        return "JogoDados{" +
-                "ship=" + ship.toString() +
-                ", cont=" + contEvent +
-                ", tipoCirculo=" + tipoCirculo +
-                ", msgLog=" + msgLog +
-                '}';
+        String str = "";
+        if(ship != null)
+            str += "\nDados da ship: \n" + ship.toString();
+        if(tipoCirculo == 1)
+            str += "Planeta com Space Station\n";
+        if(planet != null)
+            str += "\nPlaneta: \n" + planet.toString();
+
+        return str;
     }
 
     public void realizaUpgrades(int num1, int num2, int num3) {

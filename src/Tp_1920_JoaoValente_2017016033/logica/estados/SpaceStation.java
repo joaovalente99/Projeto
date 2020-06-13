@@ -1,5 +1,6 @@
 package Tp_1920_JoaoValente_2017016033.logica.estados;
 
+import Tp_1920_JoaoValente_2017016033.logica.InteracaoEsperada;
 import Tp_1920_JoaoValente_2017016033.logica.dados.JogoDados;
 
 public class SpaceStation extends EstadoAdapter{
@@ -19,5 +20,8 @@ public class SpaceStation extends EstadoAdapter{
         return new SpaceTravel(jogo);
     }
 
-
+    @Override
+    public InteracaoEsperada getInteracaoEsperada() {
+        return InteracaoEsperada.SPACE_STATION;
+    }
 }

@@ -1,5 +1,6 @@
 package Tp_1920_JoaoValente_2017016033.logica.estados;
 
+import Tp_1920_JoaoValente_2017016033.logica.InteracaoEsperada;
 import Tp_1920_JoaoValente_2017016033.logica.dados.Constantes;
 import Tp_1920_JoaoValente_2017016033.logica.dados.JogoDados;
 
@@ -22,5 +23,10 @@ public class LandOnThePlanet extends EstadoAdapter implements Constantes {
             return new SpaceTravel(jogo);
         else
             return new LandOnThePlanet(jogo);
+    }
+
+    @Override
+    public InteracaoEsperada getInteracaoEsperada() {
+        return InteracaoEsperada.LAND_ON_THE_PLANET;
     }
 }

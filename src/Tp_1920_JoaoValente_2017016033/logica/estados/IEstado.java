@@ -1,5 +1,7 @@
 package Tp_1920_JoaoValente_2017016033.logica.estados;
 
+import Tp_1920_JoaoValente_2017016033.logica.InteracaoEsperada;
+
 public interface IEstado {
     IEstado escolhaDaNave(int i);
     IEstado continuarExplorar();
@@ -15,4 +17,5 @@ public interface IEstado {
     IEstado recomecaJogo();
     IEstado trocaMilagrosa(int value);
     IEstado desiste();
+    InteracaoEsperada getInteracaoEsperada();
 }

@@ -1,5 +1,6 @@
 package Tp_1920_JoaoValente_2017016033.logica.estados;
 
+import Tp_1920_JoaoValente_2017016033.logica.InteracaoEsperada;
 import Tp_1920_JoaoValente_2017016033.logica.dados.JogoDados;
 
 public class Event extends EstadoAdapter{
@@ -23,5 +24,10 @@ public class Event extends EstadoAdapter{
         jogo.setPlanet(null);
         jogo.setAlien(null);
         return new SpaceTravel(jogo);
+    }
+
+    @Override
+    public InteracaoEsperada getInteracaoEsperada() {
+        return InteracaoEsperada.EVENT;
     }
 }

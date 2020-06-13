@@ -7,8 +7,8 @@ import Tp_1920_JoaoValente_2017016033.logica.estados.WaitingShipSelection;
 import java.util.List;
 
 public class JogoMaqEstados {
-    IEstado estado;
-    JogoDados dados;
+    private IEstado estado;
+    private JogoDados dados;
 
     public JogoMaqEstados() {
         dados = new JogoDados();
@@ -93,5 +93,14 @@ public class JogoMaqEstados {
 
     public void gameOver() {
         estado = estado.desiste();
+    }
+
+    public InteracaoEsperada getInteracaoEsperada() {
+        return estado.getInteracaoEsperada();
+    }
+
+    @Override
+    public String toString() {
+        return dados.toString();
     }
 }

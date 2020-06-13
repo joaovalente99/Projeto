@@ -1,5 +1,6 @@
 package Tp_1920_JoaoValente_2017016033.logica.estados;
 
+import Tp_1920_JoaoValente_2017016033.logica.InteracaoEsperada;
 import Tp_1920_JoaoValente_2017016033.logica.dados.JogoDados;
 
 public class LastChance extends EstadoAdapter{
@@ -19,5 +20,10 @@ public class LastChance extends EstadoAdapter{
     @Override
     public IEstado desiste() {
         return new GameOver(jogo);
+    }
+
+    @Override
+    public InteracaoEsperada getInteracaoEsperada() {
+        return InteracaoEsperada.LAST_CHANCE;
     }
 }
