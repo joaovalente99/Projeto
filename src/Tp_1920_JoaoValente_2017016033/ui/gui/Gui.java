@@ -27,7 +27,7 @@ public class Gui extends BorderPane {
 
     private void organizaComponentes() {
         BackgroundSize backgroundSize = new BackgroundSize(1200, 720, false, false, false, false);
-        BackgroundImage myBI = new BackgroundImage(ImageLoader.getImage("fundoCent.jpg"), BackgroundRepeat.NO_REPEAT,
+        BackgroundImage myBI = new BackgroundImage(ImageLoader.getImage("fundoCent.png"), BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
         setBackground(new Background(myBI));
 

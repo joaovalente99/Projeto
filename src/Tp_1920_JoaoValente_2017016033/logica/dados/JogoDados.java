@@ -236,11 +236,10 @@ public class JogoDados implements Constantes {
         String str = "";
         if(ship != null)
             str += "\nDados da ship: \n" + ship.toString();
-        if(tipoCirculo == 1)
-            str += "Planeta com Space Station\n";
         if(planet != null)
             str += "\nPlaneta: \n" + planet.toString();
-
+        if(tipoCirculo == 1)
+            str += "\nPlaneta com Space Station\n";
         return str;
     }
 

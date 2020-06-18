@@ -2,6 +2,7 @@ package Tp_1920_JoaoValente_2017016033.ui.gui.interfaces;
 
 import Tp_1920_JoaoValente_2017016033.logica.InteracaoEsperada;
 import Tp_1920_JoaoValente_2017016033.logica.JogoMaqEstadosObservavel;
+import Tp_1920_JoaoValente_2017016033.resources.sounds.SoundLoader;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -59,12 +60,14 @@ public class UIEvent extends VBox {
         hbox.getChildren().addAll(btnEventoEsp, id);
         getChildren().addAll(btnEventoRand, hbox);
 
-        btnEventoEsp.setOnAction(
-                actionEvent -> modeloObs.caiEvento(id.getValue())
-        );
-        btnEventoRand.setOnAction(
-                actionEvent -> modeloObs.caiEvento()
-        );
+        btnEventoEsp.setOnAction(actionEvent -> {
+            SoundLoader.playMusic("menuSound.mp3");
+            modeloObs.caiEvento(id.getValue());
+        });
+        btnEventoRand.setOnAction(actionEvent -> {
+            SoundLoader.playMusic("menuSound.mp3");
+            modeloObs.caiEvento();
+        });
 
     }
 

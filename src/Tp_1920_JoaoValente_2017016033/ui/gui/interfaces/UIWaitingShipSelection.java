@@ -3,6 +3,7 @@ package Tp_1920_JoaoValente_2017016033.ui.gui.interfaces;
 import Tp_1920_JoaoValente_2017016033.logica.InteracaoEsperada;
 import Tp_1920_JoaoValente_2017016033.logica.JogoMaqEstadosObservavel;
 import Tp_1920_JoaoValente_2017016033.resources.images.ImageLoader;
+import Tp_1920_JoaoValente_2017016033.resources.sounds.SoundLoader;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -46,12 +47,14 @@ public class UIWaitingShipSelection extends VBox {
         hbox.setAlignment(Pos.TOP_CENTER);
         hbox.setSpacing(10);
         getChildren().addAll(fund, hbox);
-        btnMiningShip.setOnAction(
-                actionEvent -> modeloObs.escolhaDaNave(1)
-        );
+        btnMiningShip.setOnAction(actionEvent ->  {
+                SoundLoader.playMusic("menuSound.mp3");
+                modeloObs.escolhaDaNave(1);
+            });
         btnMilitaryShip.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                SoundLoader.playMusic("menuSound.mp3");
                 modeloObs.escolhaDaNave(2);
             }
         });

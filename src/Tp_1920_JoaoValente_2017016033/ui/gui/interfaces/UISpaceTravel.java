@@ -2,6 +2,7 @@ package Tp_1920_JoaoValente_2017016033.ui.gui.interfaces;
 
 import Tp_1920_JoaoValente_2017016033.logica.InteracaoEsperada;
 import Tp_1920_JoaoValente_2017016033.logica.JogoMaqEstadosObservavel;
+import Tp_1920_JoaoValente_2017016033.resources.sounds.SoundLoader;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -46,13 +47,23 @@ public class UISpaceTravel extends VBox {
 
 
 
-        btnAvancaEspaco.setOnAction(
-                actionEvent -> modeloObs.avancaNoEspaco()
-        );
-        btnAterraPlaneta.setOnAction(e -> modeloObs.aterraPlaneta());
-        btnConverterRecursos.setOnAction(e -> modeloObs.decideconverteRecursos());
+        btnAvancaEspaco.setOnAction(actionEvent -> {
+            SoundLoader.playMusic("menuSound.mp3");
+            modeloObs.avancaNoEspaco();
+        });
+        btnAterraPlaneta.setOnAction(e -> {
+            SoundLoader.playMusic("menuSound.mp3");
+            modeloObs.aterraPlaneta();
+        });
+        btnConverterRecursos.setOnAction(e -> {
+            SoundLoader.playMusic("menuSound.mp3");
+            modeloObs.decideconverteRecursos();
+        });
 
-        btnAterrarSpaceStation.setOnAction(e -> modeloObs.aterraSpaceStation());
+        btnAterrarSpaceStation.setOnAction(e -> {
+            SoundLoader.playMusic("menuSound.mp3");
+            modeloObs.aterraSpaceStation();
+        });
 
     }
 
