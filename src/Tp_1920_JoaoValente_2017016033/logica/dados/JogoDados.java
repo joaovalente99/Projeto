@@ -72,6 +72,10 @@ public class JogoDados implements Constantes {
         contEvent = 1;
     }
 
+    public void atualizaSemRecurso() {
+        if(ship.getSemRecurso() == true)
+            ship.setSemRecursos(false);
+    }
     public int exploracao() {
         int ind = (int) (Math.random() * 8) + 1; //calcular probabilidade de cair num buraco negro (1/8)
         if(ind == 1) { //caso calhe
@@ -124,8 +128,10 @@ public class JogoDados implements Constantes {
 
 
     public void converteRecursos(int opcao) {
-        if(ship.getOfficers() != Officer.CARGO_HOLD)  //So converte recursos se tiver Cargo Holder
+        if(ship.getOfficers() != Officer.CARGO_HOLD) {  //So converte recursos se tiver Cargo Holder
             addMsgLog("Sem Cargo hold Officer para realizar trocas.");
+            ship.setSemRecursos(true);
+        }
         else if(opcao == 1) { //As funçoes abaixo falam por si
             if(ship.transformarEnergyShield() == false)
                 addMsgLog("Recursos insuficientes para a transformacao");
@@ -176,7 +182,7 @@ public class JogoDados implements Constantes {
         else  //se nao, apenas gasta combustivel normalmente
             ship.gastaCombustivel();
 
-        ind = (int) (Math.random() * 10) + 1; //calcular probabilidade de cair num planeta com space station (3/10)
+        ind = (int) (Math.random() * 2) + 1; //calcular probabilidade de cair num planeta com space station (3/10)
         if(ind < 3) { //caso tenha calhado
             addMsgLog("Calhou num sitio com space station.");
             tipoCirculo = 1;
@@ -221,7 +227,7 @@ public class JogoDados implements Constantes {
         else  //se nao, apenas gasta combustivel normalmente
             ship.gastaCombustivel();
 
-        ind = (int) (Math.random() * 10) + 1; //calcular probabilidade de cair num planeta com space station (3/10)
+        ind = (int) (Math.random() * 2) + 1; //calcular probabilidade de cair num planeta com space station (3/10)
         if(ind < 3) { //caso tenha calhado
             addMsgLog("Calhou num sitio com space station.");
             tipoCirculo = 1;

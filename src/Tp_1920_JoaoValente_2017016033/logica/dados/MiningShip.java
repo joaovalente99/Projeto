@@ -9,8 +9,10 @@ public class MiningShip extends Ship {
 
     @Override
     public boolean upgradeCargoHold() {
-        if(getOfficers() != Officer.CARGO_HOLD)
+        if(getOfficers() != Officer.CARGO_HOLD) {
+            setSemRecursos(true);
             return false;
+        }
         if(getCargoHoldLevel() < 3 && getBlack() >= 2 && getBlue() >= 2 && getGreen() >= 2 && getRed() >= 2) {
             super.setCargoHoldLevel(super.getCargoHoldLevel() + 1);
             setBlack(getBlack() - 2);
@@ -19,8 +21,10 @@ public class MiningShip extends Ship {
             setBlue(getBlue() - 2);
             return true;
         }
-        else
+        else {
+            setSemRecursos(true);
             return false;
+        }
     }
 
     @Override

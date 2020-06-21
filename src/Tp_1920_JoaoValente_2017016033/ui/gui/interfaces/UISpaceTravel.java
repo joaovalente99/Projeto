@@ -75,5 +75,6 @@ public class UISpaceTravel extends VBox {
             btnAterrarSpaceStation.setDisable(false);
         InteracaoEsperada interacaoEsperada = modeloObs.getInteracaoEsperada();
         setVisible(interacaoEsperada == InteracaoEsperada.SPACE_TRAVEL);
+        setManaged(interacaoEsperada == InteracaoEsperada.SPACE_TRAVEL);
     }
 }

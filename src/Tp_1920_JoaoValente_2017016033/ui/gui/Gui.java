@@ -40,9 +40,9 @@ public class Gui extends BorderPane {
         UIConvertResources uiconvertresources = new UIConvertResources(jme);
         UIEvent uievent = new UIEvent(jme);
         UIGameOver uigameover = new UIGameOver();
-        UILandOnThePlanet uilandontheplanet = new UILandOnThePlanet();
+        UILandOnThePlanet uilandontheplanet = new UILandOnThePlanet(jme);
         UILastChance uilastchance = new UILastChance();
-        UISpaceStation uispacestation = new UISpaceStation();
+        UISpaceStation uispacestation = new UISpaceStation(jme);
         UISpaceTravel uispacetravel = new UISpaceTravel(jme);
         VistaLogs vistaLogs = new VistaLogs(jme);
         VistaDados vistaDados = new VistaDados(jme);
@@ -58,6 +58,16 @@ public class Gui extends BorderPane {
         uilastchance.setVisible(false);
         uispacestation.setVisible(false);
         uispacetravel.setVisible(false);
+
+        uiwaitingship.setManaged(true);
+        uiconvertresources.setManaged(false);
+        uievent.setManaged(false);
+        uigameover.setManaged(false);
+        uilandontheplanet.setManaged(false);
+        uilastchance.setManaged(false);
+        uispacestation.setManaged(false);
+        uispacetravel.setManaged(false);
+
         center.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null,
                 new BorderWidths(2))));
         left.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null,

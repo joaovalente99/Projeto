@@ -7,6 +7,7 @@ public abstract class Ship implements Constantes {
     private Drone drone;
     private int cargoHoldLevel; //nivel da carga atual
     private int black, blue, red, green; //Numero de recursos
+    private boolean semRecursos; //Caso não tenha recursos para uma troca -> true;
     private int artefact; //Numero de artefactos
     private Officer officers; //tripulantes da nave
 
@@ -28,6 +29,10 @@ public abstract class Ship implements Constantes {
     //GETTERS
     public int getFuel() {
         return fuel;
+    }
+
+    public boolean getSemRecurso() {
+        return semRecursos;
     }
 
     public int getShield() {
@@ -67,6 +72,11 @@ public abstract class Ship implements Constantes {
     }
 
     //SETTERS
+
+    public void setSemRecursos(boolean rec) {
+        this.semRecursos = rec;
+    }
+
     public void setFuel(int fuel) {
         this.fuel = fuel;
     }
@@ -234,6 +244,7 @@ public abstract class Ship implements Constantes {
             shield++;
             return true;
         }
+        semRecursos = true;
         return false;
     }
 
@@ -244,6 +255,7 @@ public abstract class Ship implements Constantes {
             weapon++;
             return true;
         }
+        semRecursos = true;
         return false;
     }
 
@@ -255,6 +267,7 @@ public abstract class Ship implements Constantes {
             fuel++;
             return true;
         }
+        semRecursos = true;
         return false;
     }
 
@@ -354,11 +367,15 @@ public abstract class Ship implements Constantes {
     }
 
     public int trocaRecursos(int num1, int num2) {
-        if(num1 == num2)
+        if(num1 == num2) {
+            semRecursos = true;
             return TROCA_PELO_MESMO_RECURSO;
+        }
         if(num1 == 1) {
-            if(black == 0)
+            if(black == 0) {
+                semRecursos = true;
                 return RECURSOS_INSUFICIENTES;
+            }
             if(num2 == 2) {
                 black--;
                 red++;
@@ -376,8 +393,10 @@ public abstract class Ship implements Constantes {
             }
         }
         if(num1 == 2) {
-            if(red == 0)
+            if(red == 0) {
+                semRecursos = true;
                 return RECURSOS_INSUFICIENTES;
+            }
             if(num2 == 1) {
                 red--;
                 black++;
@@ -395,8 +414,10 @@ public abstract class Ship implements Constantes {
             }
         }
         if(num1 == 3) {
-            if(green == 0)
+            if(green == 0) {
+                semRecursos = true;
                 return RECURSOS_INSUFICIENTES;
+            }
             if(num2 == 1) {
                 green--;
                 black++;
@@ -414,8 +435,10 @@ public abstract class Ship implements Constantes {
             }
         }
         if(num1 == 4) {
-            if(blue == 0)
+            if(blue == 0) {
+                semRecursos = true;
                 return RECURSOS_INSUFICIENTES;
+            }
             if(num2 == 1) {
                 blue--;
                 black++;
@@ -432,6 +455,7 @@ public abstract class Ship implements Constantes {
                 return 1;
             }
         }
+        semRecursos = true;
         return 0;
     }
 
@@ -475,8 +499,10 @@ public abstract class Ship implements Constantes {
     public abstract boolean upgradeCargoHold();
 
     public int compraCrew() {
-        if(officers == Officer.CARGO_HOLD)
+        if(officers == Officer.CARGO_HOLD) {
+            semRecursos = true;
             return TRIPULACAO_MAXIMA;
+        }
         else {
             if(black >= 1 && blue >= 1 && green >= 1 && red >= 1) {
                 black--;
@@ -486,14 +512,19 @@ public abstract class Ship implements Constantes {
                 crewRescue();
                 return 1;
             }
-            else
+            else {
+                semRecursos = true;
                 return RECURSOS_INSUFICIENTES;
+            }
         }
     }
 
     public int droneArmor() {
-        if(drone.getArmor() == 6)
+        if(drone.getArmor() == 6) {
+            semRecursos = true;
             return ARMOR_MAXIMO;
+        }
+
         else {
             if(black >= 1 && blue >= 1 && green >= 1 && red >= 1) {
                 black--;
@@ -503,14 +534,18 @@ public abstract class Ship implements Constantes {
                 drone.setArmor(6);
                 return 1;
             }
-            else
+            else {
+                semRecursos = true;
                 return RECURSOS_INSUFICIENTES;
+            }
         }
     }
 
     public int comprarDrone() {
-        if(drone != null)
+        if(drone != null) {
+            semRecursos = true;
             return DRONE_JA_TEM;
+        }
         else {
             if(black >= 3 && blue >= 3 && green >= 3 && red >= 3) {
                 black -= 3;
@@ -520,8 +555,10 @@ public abstract class Ship implements Constantes {
                 drone = new Drone();
                 return 1;
             }
-            else
+            else {
+                semRecursos = true;
                 return RECURSOS_INSUFICIENTES;
+            }
         }
     }
 

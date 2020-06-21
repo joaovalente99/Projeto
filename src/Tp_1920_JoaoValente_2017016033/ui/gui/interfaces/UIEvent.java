@@ -76,5 +76,6 @@ public class UIEvent extends VBox {
 
         InteracaoEsperada interacaoEsperada = modeloObs.getInteracaoEsperada();
         setVisible(interacaoEsperada == InteracaoEsperada.EVENT);
+        setManaged(interacaoEsperada == InteracaoEsperada.EVENT);
     }
 }
