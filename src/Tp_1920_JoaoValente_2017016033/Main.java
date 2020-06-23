@@ -30,6 +30,7 @@ public class Main extends Application {
         stage.getIcons().add(new Image(getClass().getResourceAsStream("resources/images/planetbound.jpg")));
         stage.setTitle("Planet Bound");
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
         
     }

@@ -15,9 +15,9 @@ public class VistaDados extends VBox {
     public VistaDados(JogoMaqEstadosObservavel modelo) {
         this.modeloObs = modelo;
         organizaComponentes();
-            this.modeloObs.addPropertyChangeListener(
-                    e -> labelDados.setText(modeloObs.toString())
-            );
+        this.modeloObs.addPropertyChangeListener(
+                e -> labelDados.setText(modeloObs.toString())
+        );
     }
 
     private void organizaComponentes() {

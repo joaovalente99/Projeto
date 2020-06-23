@@ -182,7 +182,7 @@ public class JogoDados implements Constantes {
         else  //se nao, apenas gasta combustivel normalmente
             ship.gastaCombustivel();
 
-        ind = (int) (Math.random() * 2) + 1; //calcular probabilidade de cair num planeta com space station (3/10)
+        ind = (int) (Math.random() * 10); //calcular probabilidade de cair num planeta com space station (3/10)
         if(ind < 3) { //caso tenha calhado
             addMsgLog("Calhou num sitio com space station.");
             tipoCirculo = 1;
@@ -227,7 +227,7 @@ public class JogoDados implements Constantes {
         else  //se nao, apenas gasta combustivel normalmente
             ship.gastaCombustivel();
 
-        ind = (int) (Math.random() * 2) + 1; //calcular probabilidade de cair num planeta com space station (3/10)
+        ind = (int) (Math.random() * 10); //calcular probabilidade de cair num planeta com space station (3/10)
         if(ind < 3) { //caso tenha calhado
             addMsgLog("Calhou num sitio com space station.");
             tipoCirculo = 1;

@@ -66,5 +66,6 @@ public class UIWaitingShipSelection extends VBox {
     private void atualizaVista() {
         InteracaoEsperada interacaoEsperada = modeloObs.getInteracaoEsperada();
         setVisible(interacaoEsperada == InteracaoEsperada.WAITING_SHIP_SELECTION);
+        setManaged(interacaoEsperada == InteracaoEsperada.WAITING_SHIP_SELECTION);
     }
 }
