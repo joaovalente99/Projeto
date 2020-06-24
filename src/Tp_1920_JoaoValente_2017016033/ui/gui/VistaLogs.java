@@ -16,7 +16,7 @@ public class VistaLogs extends HBox {
         this.modeloObs = modelo;
         organizaComponentes();
         this.modeloObs.addPropertyChangeListener(
-                e -> labelDados.setText(modeloObs.getDados().getMsgLogEsp())
+                e -> labelDados.setText(modeloObs.getMsgLogEsp())
         );
     }
 

@@ -86,11 +86,11 @@ public class TextUserInterface {
             for(int j = 0; j < matriz[i].length; j++)
                 matriz[i][j] = '_';
         }
-        matriz[jme.getDados().getPlanet().getxL() - 1][jme.getDados().getPlanet().getyL() - 1] = 'S';
-        matriz[jme.getDados().getPlanet().getxR() - 1][jme.getDados().getPlanet().getyR() - 1] = 'R';
-        matriz[jme.getDados().getShip().getDrone().getX() - 1][jme.getDados().getShip().getDrone().getY() - 1] = 'd';
-        if(jme.getDados().getAlien() != null)
-            matriz[jme.getDados().getAlien().getX() - 1][jme.getDados().getAlien().getY() - 1] = 'a';
+        matriz[jme.getxL() - 1][jme.getyL() - 1] = 'S';
+        matriz[jme.getxR() - 1][jme.getyR() - 1] = 'R';
+        matriz[jme.getXDrone() - 1][jme.getYDrone() - 1] = 'd';
+        if(jme.getAlien() != null)
+            matriz[jme.getXAl() - 1][jme.getYAl() - 1] = 'a';
         for(int i = 0; i < matriz.length; i++) {
             for(int j = 0; j < matriz[i].length; j++)
                 System.out.print(matriz[i][j] + "\t");
@@ -119,7 +119,7 @@ public class TextUserInterface {
             System.out.println("3- Contratar um membro para a equipa;");
             System.out.println("4- Meter a armor do drone a maximo; ");
             System.out.println("5 - Comprar outro drone;");
-            if(jme.getDados().getShip() instanceof MilitaryShip)
+            if(jme.getShip() instanceof MilitaryShip)
                 System.out.println("6 - Realizar upgrade ao weapon system.");
             while(!s.hasNextInt())
                 s.next();
@@ -151,7 +151,7 @@ public class TextUserInterface {
                 jme.realizaUpgrades(value, 0, 0);
             else if(value == 5)
                 jme.realizaUpgrades(value, 0, 0);
-            else if(value == 6 && jme.getDados().getShip() instanceof MilitaryShip)
+            else if(value == 6 && jme.getShip() instanceof MilitaryShip)
                 jme.realizaUpgrades(value, 0, 0);
         }
         else
@@ -209,7 +209,7 @@ public class TextUserInterface {
         System.out.println("2- Aterrar no planeta");
         System.out.println("3- Converter Recursos");
         System.out.println("4- Verificar os dados do jogo");
-        if(jme.getDados().getTipoCirculo() == 1)
+        if(jme.getTipoCirculo() == 1)
             System.out.println("5- Aterrar na space station");
         while(!s.hasNextInt())
             s.next();
@@ -221,8 +221,8 @@ public class TextUserInterface {
         else if(value == 3)
             jme.decideconverteRecursos();
         else if(value == 4)
-            System.out.println(jme.getDados().toString());
-        else if(value == 5 && jme.getDados().getTipoCirculo() == 1)
+            System.out.println(jme.toStringD());
+        else if(value == 5 && jme.getTipoCirculo() == 1)
             jme.aterraSpaceStation();
     }
 }

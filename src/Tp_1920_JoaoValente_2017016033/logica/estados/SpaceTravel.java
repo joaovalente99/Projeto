@@ -19,7 +19,7 @@ public class SpaceTravel extends EstadoAdapter implements Constantes {
             else
                 return new LastChance(jogo);
         }
-        if(ind == CREW_FINISH)
+        if(ind == CREW_FINISH || ind == VITORIA)
             return new GameOver(jogo);
         else if(ind == CAI_EVENTO)
             return new Event(jogo);

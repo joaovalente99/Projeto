@@ -31,4 +31,12 @@ public class MiningShip extends Ship {
     public int upgradeWeapon() {
         return 0;
     }
+
+    @Override
+    public String toString() {
+        String str = "";
+        str += "Tipo: Mining Ship\n";
+        str += super.toString();
+        return str;
+    }
 }

@@ -3,15 +3,9 @@ package Tp_1920_JoaoValente_2017016033.ui.gui.interfaces;
 import Tp_1920_JoaoValente_2017016033.logica.InteracaoEsperada;
 import Tp_1920_JoaoValente_2017016033.logica.JogoMaqEstadosObservavel;
 import Tp_1920_JoaoValente_2017016033.resources.sounds.SoundLoader;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.geometry.NodeOrientation;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.ToolBar;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class UISpaceTravel extends VBox {
@@ -69,7 +63,7 @@ public class UISpaceTravel extends VBox {
 
 
     private void atualizaVista() {
-        if(modeloObs.getDados().getTipoCirculo() == 0)
+        if(modeloObs.getTipoCirculo() == 0)
             btnAterrarSpaceStation.setDisable(true);
         else
             btnAterrarSpaceStation.setDisable(false);

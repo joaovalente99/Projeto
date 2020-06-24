@@ -4,19 +4,18 @@ import Tp_1920_JoaoValente_2017016033.logica.InteracaoEsperada;
 import Tp_1920_JoaoValente_2017016033.logica.JogoMaqEstadosObservavel;
 import Tp_1920_JoaoValente_2017016033.resources.images.ImageLoader;
 import Tp_1920_JoaoValente_2017016033.resources.sounds.SoundLoader;
-import Tp_1920_JoaoValente_2017016033.resources.video.VideoLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.MediaView;
-import javafx.stage.Stage;
 
-public class UILastChance extends HBox {
+public class UILastChance extends VBox {
 
     private JogoMaqEstadosObservavel modeloObs;
+    private TextField tf;
 
     public UILastChance(JogoMaqEstadosObservavel modelo) {
         this.modeloObs = modelo;
@@ -30,48 +29,63 @@ public class UILastChance extends HBox {
 
     private void organizaComponentes() {
 
-        go = new ImageView(ImageLoader.getImage("gameOver.jpg"));
-        go.setFitHeight(200);
-        go.setFitWidth(500);
+        ImageView fund = new ImageView(ImageLoader.getImage("LastChance.jpg"));
+        fund.setFitHeight(200);
+        fund.setFitWidth(500);
 
-        hb = new HBox();
-        Button btnRecomeca = new Button("Recomecar jogo");
-        Button btnSair = new Button("Sair");
-
-        hb.setAlignment(Pos.CENTER);
-        hb.setSpacing(10);
-        hb.setPadding(new Insets(5, 5, 5, 5));
         setAlignment(Pos.CENTER);
         setSpacing(10);
         setPadding(new Insets(5, 5, 5, 5));
-        btnRecomeca.setMinSize(200, 80);
-        btnSair.setMinSize(200, 80);
-        hb.getChildren().addAll(btnRecomeca, btnSair);
-        getChildren().addAll(go, hb);
 
+        HBox hb = new HBox();
+        Button btnTrocaEContinua = new Button("Trocar recursos e continuar a jogar");
+        Button btnSair = new Button("Sair");
+        tf = new TextField();
+        tf.setPromptText("Numero de recursos");
+        btnTrocaEContinua.setMinSize(245, 30);
+        btnSair.setMinSize(500, 30);
+        tf.setMinSize(245, 30);
 
+        hb.getChildren().addAll(tf, btnTrocaEContinua);
+        hb.setPadding(new Insets(5, 5, 5, 5));
+        hb.setSpacing(10);
+        hb.setAlignment(Pos.CENTER);
 
-        btnRecomeca.setOnAction(actionEvent -> {
+        getChildren().addAll(fund, hb, btnSair);
+
+        btnTrocaEContinua.setOnAction(e -> {
             SoundLoader.playMusic("menuSound.mp3");
-            mv.getMediaPlayer().stop();
-            getChildren().remove(mv);
-            modeloObs.recomecaJogo();
+            try{
+                int n = getValue();
+                modeloObs.trocaMilagrosa(n);
+            }catch(NumberFormatException ex){
+            }
         });
+
         btnSair.setOnAction(e -> {
             SoundLoader.playMusic("menuSound.mp3");
-            ((Stage) getScene().getWindow()).close();
+            modeloObs.gameOver();
         });
+
 
     }
 
 
     private void atualizaVista() {
         InteracaoEsperada interacaoEsperada = modeloObs.getInteracaoEsperada();
-        if(interacaoEsperada == InteracaoEsperada.GAME_OVER) {
-            mv = new MediaView(VideoLoader.playVideo("end.mp4"));
-            getChildren().addAll(mv);
+        setVisible(interacaoEsperada == InteracaoEsperada.LAST_CHANCE);
+        setManaged(interacaoEsperada == InteracaoEsperada.LAST_CHANCE);
+    }
+
+    private int getValue() throws NumberFormatException {
+
+        String s1 = (tf.getText()).trim();
+        int value = 0;
+        if (s1.length() < 1){
+            throw new NumberFormatException();
         }
-        setVisible(interacaoEsperada == InteracaoEsperada.GAME_OVER);
-        setManaged(interacaoEsperada == InteracaoEsperada.GAME_OVER);
+        value = Integer.parseInt(s1);
+        return value;
+
     }
 }

@@ -19,6 +19,7 @@ public class MilitaryShip extends Ship {
     @Override
     public String toString() {
         String str = "";
+        str += "Tipo: Military Ship\n";
         str += "Weapon Level: " + weaponLevel + "\n";
         str += super.toString();
         return str;

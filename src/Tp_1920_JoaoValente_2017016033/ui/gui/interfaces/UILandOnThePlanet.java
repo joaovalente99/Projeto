@@ -7,7 +7,6 @@ import Tp_1920_JoaoValente_2017016033.resources.images.ImageLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
@@ -62,33 +61,33 @@ public class UILandOnThePlanet extends HBox {
 
 
     private void atualizaVista() {
-        if(modeloObs.getDados().getShip() instanceof MilitaryShip)
+        if(modeloObs.getShip() instanceof MilitaryShip)
             imgNave = new ImageView(ImageLoader.getImage("militaryShip.png"));
         else
             imgNave = new ImageView(ImageLoader.getImage("miningShip.png"));
 
-        if(modeloObs.getDados().getAlien() instanceof BlackAlien)
+        if(modeloObs.getAlien() instanceof BlackAlien)
             imgAlien = new ImageView(ImageLoader.getImage("blackAlienWithEyes.png"));
-        else if(modeloObs.getDados().getAlien() instanceof RedAlien)
+        else if(modeloObs.getAlien() instanceof RedAlien)
             imgAlien = new ImageView(ImageLoader.getImage("redAlienWithEyes.png"));
-        else if(modeloObs.getDados().getAlien() instanceof BlueAlien)
+        else if(modeloObs.getAlien() instanceof BlueAlien)
             imgAlien = new ImageView(ImageLoader.getImage("blueAlienWithEyes.png"));
         else
             imgAlien = new ImageView(ImageLoader.getImage("greenAlienWithEyes.png"));
 
-        if(modeloObs.getDados().getPlanet() != null) {
-            if (modeloObs.getDados().getPlanet().getPremio() == 1)
+        if(modeloObs.getPlanet() != null) {
+            if (modeloObs.getPremio() == 1)
                 imgRecurso = new ImageView(ImageLoader.getImage("blackResource.png"));
-            else if (modeloObs.getDados().getPlanet().getPremio() == 2)
+            else if (modeloObs.getPremio() == 2)
                 imgRecurso = new ImageView(ImageLoader.getImage("redResource.png"));
-            else if (modeloObs.getDados().getPlanet().getPremio() == 3)
+            else if (modeloObs.getPremio() == 3)
                 imgRecurso = new ImageView(ImageLoader.getImage("blueResource.png"));
-            else if (modeloObs.getDados().getPlanet().getPremio() == 4)
+            else if (modeloObs.getPremio() == 4)
                 imgRecurso = new ImageView(ImageLoader.getImage("greenResource.png"));
             else
                 imgRecurso = new ImageView(ImageLoader.getImage("artefacto.png"));
 
-            if(modeloObs.getDados().getShip().getDrone() != null)
+            if(modeloObs.getDrone() != null)
                 imgDrone = new ImageView(ImageLoader.getImage("drone.png"));
         }
 
@@ -99,22 +98,22 @@ public class UILandOnThePlanet extends HBox {
         InteracaoEsperada interacaoEsperada = modeloObs.getInteracaoEsperada();
         setVisible(interacaoEsperada == InteracaoEsperada.LAND_ON_THE_PLANET);
         setManaged(interacaoEsperada == InteracaoEsperada.LAND_ON_THE_PLANET);
-        if(modeloObs.getDados().getPlanet() != null)
-            gp.add(imgNave, modeloObs.getDados().getPlanet().getxL() - 1,
-                    modeloObs.getDados().getPlanet().getyL() - 1);
+        if(modeloObs.getPlanet() != null)
+            gp.add(imgNave, modeloObs.getxL() - 1,
+                    modeloObs.getyL() - 1);
 
-        if(modeloObs.getDados().getAlien() != null)
-            gp.add(imgAlien, modeloObs.getDados().getAlien().getX() - 1,
-                    modeloObs.getDados().getAlien().getY() - 1);
+        if(modeloObs.getAlien() != null)
+            gp.add(imgAlien, modeloObs.getXAlien() - 1,
+                    modeloObs.getYAlien() - 1);
 
-        if(modeloObs.getDados().getPlanet() != null && modeloObs.getDados().getTemRecurso() == 0)
-            gp.add(imgRecurso, modeloObs.getDados().getPlanet().getxR() - 1,
-                    modeloObs.getDados().getPlanet().getyR() - 1);
+        if(modeloObs.getPlanet() != null && modeloObs.getTemRecurso() == 0)
+            gp.add(imgRecurso, modeloObs.getxR() - 1,
+                    modeloObs.getyR() - 1);
 
-        if(modeloObs.getDados().getPlanet() != null) {
-            if(modeloObs.getDados().getShip().getDrone() != null)
-                gp.add(imgDrone, modeloObs.getDados().getShip().getDrone().getX() - 1,
-                        modeloObs.getDados().getShip().getDrone().getY() - 1);
+        if(modeloObs.getPlanet() != null) {
+            if(modeloObs.getDrone() != null)
+                gp.add(imgDrone, modeloObs.getXDrone() - 1,
+                        modeloObs.getYDrone() - 1);
         }
 
     }

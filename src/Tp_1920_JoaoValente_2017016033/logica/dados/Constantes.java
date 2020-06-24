@@ -6,8 +6,6 @@ public interface Constantes {
     int MORTE = 0x02;
     int ATAQUE_FALHADO = 0x03;
     int CAI_EVENTO = 0x04;
-    int CIRCULO_BRANCO = 0x05;
-    int CIRCULO_VERMELHO = 0x06;
     int COMBUSTIVEL_ESGOTADO = 0x07;
     int RECURSOS_INSUFICIENTES = 0x08;
     int TROCA_PELO_MESMO_RECURSO = 0x09;
@@ -20,4 +18,6 @@ public interface Constantes {
     int VITORIA_DRONE = 0x17;
     int VITORIA_ALIEN = 0x18;
     int PLANETA_VAZIO = 0x19;
+    int NAO_TEM_DRONE = 0x20;
+    int VITORIA = 0x21;
 }

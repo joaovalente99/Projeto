@@ -1,9 +1,10 @@
 package Tp_1920_JoaoValente_2017016033.logica.dados;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JogoDados implements Constantes {
+public class JogoDados implements Constantes, Serializable {
     private Ship ship;
     private int contEvent; //contador para saber se é evento ou não
     private int tipoCirculo; //0 se for branco, 1 se for vermelho
@@ -85,6 +86,11 @@ public class JogoDados implements Constantes {
         else  //se nao, apenas gasta combustivel normalmente
             ship.gastaCombustivel();
 
+        if(ship.getArtefact() == 5) {
+            addMsgLog("Encontrou os 5 artefactos!");
+            return VITORIA;
+        }
+
         if(ship.getOfficers() == Officer.DEATH) { //Caso tenha ficado sem officers
             addMsgLog("Ficou sem membros da equipa.");
             return CREW_FINISH;
@@ -146,7 +152,7 @@ public class JogoDados implements Constantes {
         }
     }
 
-    public void caiEvento() {
+    public int caiEvento() {
         int ind = (int) (Math.random() * 6) + 1; //Calcula qual evento calhou, cada numero, numero do evento especifico
         if(ind == 1) { //morre um tripulante, caso nao tenha shield officer ou weapon officer, morrem 2
             if(ship.getOfficers() == Officer.CAPTAIN || ship.getOfficers() == Officer.NAVIGATION || ship.getOfficers() == Officer.LANDING_PARTY)
@@ -191,9 +197,15 @@ public class JogoDados implements Constantes {
         else  //caso nao tenha calado num
             tipoCirculo = 0;
 
+        if(ship.getFuel() <= 0) {
+            addMsgLog("Ficou sem combustivel");
+            return 0;
+        }
+        return 1;
+
     }
 
-    public void caiEvento(int ind) { //mesma coisa que em cima mas nao calcula de forma random
+    public int caiEvento(int ind) { //mesma coisa que em cima mas nao calcula de forma random
         if(ind == 1) {
             ship.crewDeath();
             addMsgLog("[Evento 1] Um membro da equipa morreu.");
@@ -233,8 +245,19 @@ public class JogoDados implements Constantes {
             tipoCirculo = 1;
             contUpg = 1;
         }
-        else  //caso nao tenha calado num
+        else  //caso nao tenha calhado num
             tipoCirculo = 0;
+
+        if(ship.getFuel() <= 0) {
+            addMsgLog("Ficou sem combustivel");
+            return 0;
+        }
+        if(ship.getOfficers() == Officer.DEATH) {
+            addMsgLog("Ficou sem officers");
+            return 0;
+        }
+        return 1;
+
     }
 
     @Override
@@ -286,6 +309,8 @@ public class JogoDados implements Constantes {
                 addMsgLog("Recursos insuficientes para a compra.");
             else if(msg == ARMOR_MAXIMO)
                 addMsgLog("Ja tem o armor a maximo.");
+            else if(msg == NAO_TEM_DRONE)
+                addMsgLog("Não tem drone para esta ação");
             else
                 addMsgLog("Aumento de armor realizado com sucesso.");
         }
@@ -484,10 +509,6 @@ public class JogoDados implements Constantes {
         }
         else {
             ship.setArtefact(ship.getArtefact() + 1);
-            if(ship.getArtefact() == 5) {
-                addMsgLog("Encontrou todos os artefactos!");
-                return 1;
-            }
             addMsgLog("Encontrou um artefacto.");
         }
         return 0;

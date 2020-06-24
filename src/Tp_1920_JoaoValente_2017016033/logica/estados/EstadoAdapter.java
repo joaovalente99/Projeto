@@ -2,7 +2,9 @@ package Tp_1920_JoaoValente_2017016033.logica.estados;
 
 import Tp_1920_JoaoValente_2017016033.logica.dados.JogoDados;
 
-public abstract class EstadoAdapter implements IEstado {
+import java.io.Serializable;
+
+public abstract class EstadoAdapter implements IEstado, Serializable {
     protected JogoDados jogo;
 
     public EstadoAdapter(JogoDados jogo) {

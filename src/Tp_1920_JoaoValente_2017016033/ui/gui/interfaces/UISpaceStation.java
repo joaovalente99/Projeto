@@ -17,7 +17,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-import javax.tools.Tool;
 
 public class UISpaceStation extends VBox {
 
@@ -65,13 +64,13 @@ public class UISpaceStation extends VBox {
         btnUpgradeCargoHold.setOnAction(actionEvent -> {
             SoundLoader.playMusic("menuSound.mp3");
             modeloObs.realizaUpgrades(1, 0, 0);
-            if(modeloObs.getDados().getShip().getSemRecurso() == true) {
+            if(modeloObs.getSemRecurso() == true) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Erro");
                 alert.setHeaderText(null);
                 alert.setContentText("Recursos insuficientes, sem cargo Hold ou level maximo atingido para completar a ação.");
                 alert.showAndWait();
-                modeloObs.getDados().atualizaSemRecurso();
+                modeloObs.atualizaSemRecurso();
             }
         });
 
@@ -91,7 +90,7 @@ public class UISpaceStation extends VBox {
             btnComprarDrone.setVisible(false);
             btnContinuarViagen.setVisible(false);
 
-            if(modeloObs.getDados().getShip() instanceof MilitaryShip) {
+            if(modeloObs.getShip() instanceof MilitaryShip) {
                 btnRealizarUpgradeWeapon.setManaged(false);
                 btnRealizarUpgradeWeapon.setVisible(false);
             }
@@ -147,13 +146,13 @@ public class UISpaceStation extends VBox {
                     num2 = 4;
 
                 modeloObs.realizaUpgrades(2, num1, num2);
-                if(modeloObs.getDados().getShip().getSemRecurso() == true) {
+                if(modeloObs.getSemRecurso() == true) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Erro");
                     alert.setHeaderText(null);
                     alert.setContentText("Recursos insuficientes ou troca pelo mesmo recurso.");
                     alert.showAndWait();
-                    modeloObs.getDados().atualizaSemRecurso();
+                    modeloObs.atualizaSemRecurso();
                 }
             });
 
@@ -186,7 +185,7 @@ public class UISpaceStation extends VBox {
                 btnComprarDrone.setVisible(true);
                 btnContinuarViagen.setVisible(true);
 
-                if(modeloObs.getDados().getShip() instanceof MilitaryShip) {
+                if(modeloObs.getShip() instanceof MilitaryShip) {
                     btnRealizarUpgradeWeapon.setManaged(true);
                     btnRealizarUpgradeWeapon.setVisible(true);
                 }
@@ -197,52 +196,52 @@ public class UISpaceStation extends VBox {
         btnContratarMembro.setOnAction(e -> {
             SoundLoader.playMusic("menuSound.mp3");
             modeloObs.realizaUpgrades(3, 0, 0);
-            if(modeloObs.getDados().getShip().getSemRecurso() == true) {
+            if(modeloObs.getSemRecurso() == true) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Erro");
                 alert.setHeaderText(null);
                 alert.setContentText("Recursos insuficientes ou membros já a máximo para completar a ação.");
                 alert.showAndWait();
-                modeloObs.getDados().atualizaSemRecurso();
+                modeloObs.atualizaSemRecurso();
             }
         });
 
         btnArmorDrone.setOnAction(e -> {
             SoundLoader.playMusic("menuSound.mp3");
             modeloObs.realizaUpgrades(4, 0, 0);
-            if(modeloObs.getDados().getShip().getSemRecurso() == true) {
+            if(modeloObs.getSemRecurso() == true) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Erro");
                 alert.setHeaderText(null);
                 alert.setContentText("Recursos insuficientes ou armor do drone já a maximo para completar a ação.");
                 alert.showAndWait();
-                modeloObs.getDados().atualizaSemRecurso();
+                modeloObs.atualizaSemRecurso();
             }
         });
 
         btnComprarDrone.setOnAction(e -> {
             SoundLoader.playMusic("menuSound.mp3");
             modeloObs.realizaUpgrades(5, 0, 0);
-            if(modeloObs.getDados().getShip().getSemRecurso() == true) {
+            if(modeloObs.getSemRecurso() == true) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Erro");
                 alert.setHeaderText(null);
                 alert.setContentText("Recursos insuficientes ou já tem um drone para completar a ação.");
                 alert.showAndWait();
-                modeloObs.getDados().atualizaSemRecurso();
+                modeloObs.atualizaSemRecurso();
             }
         });
 
         btnRealizarUpgradeWeapon.setOnAction(e -> {
             SoundLoader.playMusic("menuSound.mp3");
             modeloObs.realizaUpgrades(6, 0, 0);
-            if(modeloObs.getDados().getShip().getSemRecurso() == true) {
+            if(modeloObs.getSemRecurso() == true) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Erro");
                 alert.setHeaderText(null);
                 alert.setContentText("Recursos insuficientes para completar a ação.");
                 alert.showAndWait();
-                modeloObs.getDados().atualizaSemRecurso();
+                modeloObs.atualizaSemRecurso();
             }
         });
 
@@ -255,7 +254,7 @@ public class UISpaceStation extends VBox {
 
 
     private void atualizaVista() {
-        if(modeloObs.getDados().getShip() instanceof MiningShip) {
+        if(modeloObs.getShip() instanceof MiningShip) {
             btnRealizarUpgradeWeapon.setVisible(false);
             btnRealizarUpgradeWeapon.setManaged(false);
         }

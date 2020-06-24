@@ -3,20 +3,13 @@ package Tp_1920_JoaoValente_2017016033.ui.gui.interfaces;
 import Tp_1920_JoaoValente_2017016033.logica.InteracaoEsperada;
 import Tp_1920_JoaoValente_2017016033.logica.JogoMaqEstadosObservavel;
 import Tp_1920_JoaoValente_2017016033.resources.sounds.SoundLoader;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-import java.awt.*;
-
-import static java.awt.Color.*;
 
 public class UIEvent extends VBox {
 

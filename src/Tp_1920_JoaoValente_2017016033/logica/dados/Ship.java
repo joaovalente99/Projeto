@@ -1,6 +1,8 @@
 package Tp_1920_JoaoValente_2017016033.logica.dados;
 
-public abstract class Ship implements Constantes {
+import java.io.Serializable;
+
+public abstract class Ship implements Constantes, Serializable {
     private int weapon; //quantidade de armas que tem
     private int fuel;   //quantidade de combustivel que tem
     private int shield; //quantidade de armadura que tem
@@ -520,6 +522,8 @@ public abstract class Ship implements Constantes {
     }
 
     public int droneArmor() {
+        if(drone == null)
+            return NAO_TEM_DRONE;
         if(drone.getArmor() == 6) {
             semRecursos = true;
             return ARMOR_MAXIMO;

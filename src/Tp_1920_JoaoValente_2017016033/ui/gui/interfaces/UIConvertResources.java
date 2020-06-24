@@ -9,7 +9,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class UIConvertResources extends VBox {
@@ -45,39 +44,39 @@ public class UIConvertResources extends VBox {
         btnConverterShield.setOnAction(e -> {
             SoundLoader.playMusic("menuSound.mp3");
             modeloObs.converteRecursos(1);
-            if(modeloObs.getDados().getShip().getSemRecurso() == true) {
+            if(modeloObs.getSemRecurso() == true) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Erro");
                 alert.setHeaderText(null);
                 alert.setContentText("Recursos insuficientes para completar a ação.");
                 alert.showAndWait();
-                modeloObs.getDados().atualizaSemRecurso();
+                modeloObs.atualizaSemRecurso();
             }
         });
 
         btnConverterAmmo.setOnAction(e -> {
             SoundLoader.playMusic("menuSound.mp3");
             modeloObs.converteRecursos(2);
-            if(modeloObs.getDados().getShip().getSemRecurso() == true) {
+            if(modeloObs.getSemRecurso() == true) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Erro");
                 alert.setHeaderText(null);
                 alert.setContentText("Recursos insuficientes para completar a ação.");
                 alert.showAndWait();
-                modeloObs.getDados().atualizaSemRecurso();
+                modeloObs.atualizaSemRecurso();
             }
         });
 
         btnCoverterFuel.setOnAction(e -> {
             SoundLoader.playMusic("menuSound.mp3");
             modeloObs.converteRecursos(3);
-            if(modeloObs.getDados().getShip().getSemRecurso() == true) {
+            if(modeloObs.getSemRecurso() == true) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Erro");
                 alert.setHeaderText(null);
                 alert.setContentText("Recursos insuficientes para completar a ação.");
                 alert.showAndWait();
-                modeloObs.getDados().atualizaSemRecurso();
+                modeloObs.atualizaSemRecurso();
             }
         });
 

@@ -1,6 +1,8 @@
 package Tp_1920_JoaoValente_2017016033.logica.dados;
 
-public class Planet implements Constantes{
+import java.io.Serializable;
+
+public class Planet implements Constantes, Serializable {
     private int tipoRecurso; //Tipo de recurso que calhou neste planeta; 1-black; 2- red; 3- blue; 4- green
     private int black;
     private int red;
@@ -179,5 +181,25 @@ public class Planet implements Constantes{
         else
             artefacto--;
         numRecursos--;
+    }
+
+    @Override
+    public String toString() {
+        String str = "";
+        if(tipoRecurso == 1)
+            str += "Tipo de Planeta: Black\n";
+        else if(tipoRecurso == 2)
+            str += "Tipo de Planeta: Red\n";
+        else if(tipoRecurso == 3)
+            str += "Tipo de Planeta: Blue\n";
+        else
+            str += "Tipo de Planeta: Green\n";
+        str += "Recursos disponíveis:\n";
+        str += "Black: " + black + "\n";
+        str += "Red: " + red + "\n";
+        str += "Green: " + green + "\n";
+        str += "Blue: " + blue + "\n";
+        str += "Artefacto: " + artefacto + "\n";
+        return str;
     }
 }

@@ -1,6 +1,8 @@
 package Tp_1920_JoaoValente_2017016033.logica.dados;
 
-public abstract class Alien {
+import java.io.Serializable;
+
+public abstract class Alien implements Serializable {
     private int x, y; //coordenadas do alien
 
     public Alien(int x, int y) {

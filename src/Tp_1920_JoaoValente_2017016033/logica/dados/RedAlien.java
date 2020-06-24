@@ -1,7 +1,5 @@
 package Tp_1920_JoaoValente_2017016033.logica.dados;
 
-import Tp_1920_JoaoValente_2017016033.logica.dados.Alien;
-import Tp_1920_JoaoValente_2017016033.logica.dados.Constantes;
 
 public class RedAlien extends Alien implements Constantes {
 

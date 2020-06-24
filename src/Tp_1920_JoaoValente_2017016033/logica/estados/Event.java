@@ -12,7 +12,12 @@ public class Event extends EstadoAdapter{
 
     @Override
     public IEstado saiDoEvento() {
-        jogo.caiEvento();
+        if(jogo.caiEvento() == 0) {
+            if(!jogo.lastChance())
+                return new GameOver(jogo);
+            else
+                return new LastChance(jogo);
+        }
         jogo.setPlanet(null);
         jogo.setAlien(null);
         return new SpaceTravel(jogo);
@@ -20,7 +25,12 @@ public class Event extends EstadoAdapter{
 
     @Override
     public IEstado saiDoEvento(int id) {
-        jogo.caiEvento(id);
+        if(jogo.caiEvento(id) == 0) {
+            if(!jogo.lastChance())
+                return new GameOver(jogo);
+            else
+                return new LastChance(jogo);
+        }
         jogo.setPlanet(null);
         jogo.setAlien(null);
         return new SpaceTravel(jogo);

@@ -15,8 +15,6 @@ public class LandOnThePlanet extends EstadoAdapter implements Constantes {
         int msg = jogo.trocaTurno();
         if(msg == SUCESSO_SAQUE) {
             int msg2 = jogo.recompensaDada();
-            if(msg2 == 1)
-                return new GameOver(jogo);
             return new SpaceTravel(jogo);
         }
         else if(msg == VITORIA_ALIEN)

@@ -1,6 +1,6 @@
 package Tp_1920_JoaoValente_2017016033.logica;
 
-import Tp_1920_JoaoValente_2017016033.logica.dados.JogoDados;
+import Tp_1920_JoaoValente_2017016033.logica.dados.*;
 import Tp_1920_JoaoValente_2017016033.logica.estados.IEstado;
 
 import java.beans.PropertyChangeListener;
@@ -90,12 +90,24 @@ public class JogoMaqEstadosObservavel {
         propertyChangeSupport.firePropertyChange(null, false, true);
     }
 
-    public JogoDados getDados() {
-        return jogoMaqEstados.getDados();
-    }
 
+    public void setDados(JogoDados dados) {
+        jogoMaqEstados.setDados(dados);
+    }
     public IEstado getEstado() {
         return jogoMaqEstados.getEstado();
+    }
+
+    public void setEstado(IEstado ies) {
+        jogoMaqEstados.setEstado(ies);
+    }
+
+    public JogoMaqEstados getJogoMaqEstados() {
+        return jogoMaqEstados;
+    }
+
+    public void setJogoMaqEstados(JogoMaqEstados jmq) {
+        jogoMaqEstados = jmq;
     }
 
     @Override
@@ -105,5 +117,78 @@ public class JogoMaqEstadosObservavel {
 
     public InteracaoEsperada getInteracaoEsperada() {
         return jogoMaqEstados.getInteracaoEsperada();
+    }
+
+
+    public boolean getSemRecurso() {
+        return jogoMaqEstados.getSemRecurso();
+    }
+
+    public void atualizaSemRecurso() {
+        jogoMaqEstados.atualizaSemRecurso();
+    }
+
+    public Ship getShip() {
+        return jogoMaqEstados.getShip();
+    }
+
+    public String getMsgLogEsp() {
+        return jogoMaqEstados.getMsgLogEsp();
+    }
+
+    public Alien getAlien() {
+        return jogoMaqEstados.getAlien();
+    }
+
+    public Planet getPlanet() {
+        return jogoMaqEstados.getPlanet();
+    }
+
+    public int getPremio() {
+        return jogoMaqEstados.getPremio();
+    }
+
+    public Drone getDrone() {
+        return jogoMaqEstados.getDrone();
+    }
+
+    public int getxL() {
+        return jogoMaqEstados.getxL();
+    }
+
+    public int getyL() {
+        return jogoMaqEstados.getyL();
+    }
+
+    public int getXAlien() {
+        return jogoMaqEstados.getXAl();
+    }
+
+    public int getYAlien() {
+        return jogoMaqEstados.getYAl();
+    }
+
+    public int getTemRecurso() {
+        return jogoMaqEstados.getTemRecurso();
+    }
+
+    public int getxR() {
+        return jogoMaqEstados.getxR();
+    }
+
+    public int getyR() {
+        return jogoMaqEstados.getyR();
+    }
+
+    public int getXDrone() {
+        return jogoMaqEstados.getXDrone();
+    }
+
+    public int getYDrone() {
+        return jogoMaqEstados.getYDrone();
+    }
+
+    public int getTipoCirculo() {
+        return jogoMaqEstados.getTipoCirculo();
     }
 }

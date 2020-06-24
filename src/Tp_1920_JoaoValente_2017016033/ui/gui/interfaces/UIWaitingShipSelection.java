@@ -8,14 +8,10 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Line;
 
 
 public class UIWaitingShipSelection extends VBox {
@@ -47,6 +43,7 @@ public class UIWaitingShipSelection extends VBox {
         hbox.setAlignment(Pos.TOP_CENTER);
         hbox.setSpacing(10);
         getChildren().addAll(fund, hbox);
+
         btnMiningShip.setOnAction(actionEvent ->  {
                 SoundLoader.playMusic("menuSound.mp3");
                 modeloObs.escolhaDaNave(1);

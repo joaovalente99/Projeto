@@ -1,6 +1,8 @@
 package Tp_1920_JoaoValente_2017016033.logica.dados;
 
-public class Drone {
+import java.io.Serializable;
+
+public class Drone implements Serializable {
     private int armor; //quantidade de armor que tem
     private int x, y; //coordenadas do drone
 

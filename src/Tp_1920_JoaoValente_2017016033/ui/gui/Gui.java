@@ -1,19 +1,26 @@
 package Tp_1920_JoaoValente_2017016033.ui.gui;
 
+import Tp_1920_JoaoValente_2017016033.files.FileUtility;
 import Tp_1920_JoaoValente_2017016033.logica.JogoMaqEstados;
 import Tp_1920_JoaoValente_2017016033.logica.JogoMaqEstadosObservavel;
 import Tp_1920_JoaoValente_2017016033.resources.images.ImageLoader;
+import Tp_1920_JoaoValente_2017016033.resources.sounds.SoundLoader;
 import Tp_1920_JoaoValente_2017016033.ui.gui.interfaces.*;
-import javafx.event.ActionEvent;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
+import javafx.scene.control.*;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
-import java.util.Stack;
+import java.awt.*;
+import java.io.*;
 
 
 public class Gui extends BorderPane {
@@ -30,6 +37,8 @@ public class Gui extends BorderPane {
         BackgroundImage myBI = new BackgroundImage(ImageLoader.getImage("fundoCent.png"), BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
         setBackground(new Background(myBI));
+
+        SoundLoader.playMusicFundo("gameSound.mp3");
 
 
         //Cria componentes
@@ -94,16 +103,75 @@ public class Gui extends BorderPane {
         MenuItem fileExit = new MenuItem("Exit");
         fileMenu.getItems().addAll(fileSave, fileLoad, fileExit);
 
+
         Menu aboutMenu = new Menu("About");
         MenuItem aboutInfo = new MenuItem("Info");
         aboutMenu.getItems().addAll(aboutInfo);
 
-        menuBar.getMenus().addAll(fileMenu, aboutMenu);
+        Menu volumeMenu = new Menu("Volume");
+        CustomMenuItem custom = new CustomMenuItem();
+        Slider slider = new Slider(0, 100, 50);
+        slider.setOrientation(Orientation.VERTICAL);
+        menuBar.getMenus().addAll(fileMenu, aboutMenu, volumeMenu);
+        custom.setContent(slider);
+        custom.setHideOnClick(false);
+        volumeMenu.getItems().add(custom);
         setTop(menuBar);
 
-        //Eventos para os menus (deixar para depois)
+        //Eventos para os menus
+
+        aboutInfo.setOnAction( e -> {
+            try {
+                Desktop.getDesktop().open(new java.io.File("Planet_Bound_V2_-_rules.pdf"));
+            } catch(Exception es) {
+
+            }
+        });
+
+        fileExit.setOnAction( e ->
+                ((Stage) getScene().getWindow()).close()
+        );
 
 
+
+        fileSave.setOnAction((e) -> {
+            FileChooser fileChooser = new FileChooser();
+            File selectedFile = fileChooser.showSaveDialog(null);
+            if (selectedFile != null) {
+                try{
+                    FileUtility.saveGameToFile(selectedFile, jme.getJogoMaqEstados());
+                }catch(IOException ex){
+                    Alert dialogoResultado = new Alert(Alert.AlertType.INFORMATION);
+                    dialogoResultado.setHeaderText("Save");
+                    dialogoResultado.setContentText("Operation failed: " + ex);
+                    dialogoResultado.showAndWait();
+                }
+            }
+        });
+
+        fileLoad.setOnAction((e) -> {
+            FileChooser fileChooser = new FileChooser();
+            File selectedFile = fileChooser.showOpenDialog(null);
+            if (selectedFile != null) {
+                try{
+                    JogoMaqEstados dados =
+                            (JogoMaqEstados) FileUtility.retrieveGameFromFile(selectedFile);
+                    if(dados != null){
+                        jme.setJogoMaqEstados(dados);
+                    }
+                }catch(IOException | ClassNotFoundException ex){
+                    Alert dialogoResultado = new Alert(Alert.AlertType.INFORMATION);
+                    dialogoResultado.setHeaderText("Load");
+                    dialogoResultado.setContentText("Operation failed: " + ex);
+                    dialogoResultado.showAndWait();
+                }
+
+            }
+        });
+
+        volumeMenu.setOnShowing( e ->
+            slider.valueProperty().addListener((observableValue, number, t1) -> SoundLoader.changeVolume(t1.doubleValue()))
+        );
     }
 
 }

@@ -5,7 +5,6 @@ import Tp_1920_JoaoValente_2017016033.logica.JogoMaqEstadosObservavel;
 import Tp_1920_JoaoValente_2017016033.resources.images.ImageLoader;
 import Tp_1920_JoaoValente_2017016033.resources.sounds.SoundLoader;
 import Tp_1920_JoaoValente_2017016033.resources.video.VideoLoader;
-import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -57,6 +56,7 @@ public class UIGameOver extends VBox {
 
 
         btnRecomeca.setOnAction(actionEvent -> {
+            SoundLoader.playMusicFundo("gameSound.mp3");
             SoundLoader.playMusic("menuSound.mp3");
             mv.getMediaPlayer().stop();
             getChildren().remove(mv);
@@ -73,6 +73,7 @@ public class UIGameOver extends VBox {
     private void atualizaVista() {
         InteracaoEsperada interacaoEsperada = modeloObs.getInteracaoEsperada();
         if(interacaoEsperada == InteracaoEsperada.GAME_OVER) {
+            SoundLoader.playMusicFundo(null);
             mv = new MediaView(VideoLoader.playVideo("end.mp4"));
             getChildren().addAll(mv);
         }
