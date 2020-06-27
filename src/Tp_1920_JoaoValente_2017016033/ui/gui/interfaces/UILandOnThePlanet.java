@@ -49,6 +49,7 @@ public class UILandOnThePlanet extends HBox {
             gp.getColumnConstraints().add(column);
         }
 
+        bt.setMinSize(600, 600);
         bt.setOnKeyPressed(e -> {
             if(e.getCode() == KeyCode.ENTER)
                 modeloObs.trocaTurno();

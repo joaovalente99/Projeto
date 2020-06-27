@@ -15,7 +15,8 @@ public class SoundLoader {
         mp = new MediaPlayer(music);
         mp.setStartTime(Duration.millis(250));
         mp.setStopTime(music.getDuration());
-        mp.setVolume(sound);
+        if(sound > 0)
+            mp.setVolume(sound);
         mp.setAutoPlay(true);
     }
 

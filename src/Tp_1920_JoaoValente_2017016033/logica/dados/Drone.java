@@ -34,13 +34,6 @@ public class Drone implements Serializable {
         this.armor = armor;
     }
 
-    @Override
-    public String toString() {
-        return "Drone{" +
-                "armor=" + armor +
-                '}';
-    }
-
     public void avancaX() {
         if(x < 6)
             x++;

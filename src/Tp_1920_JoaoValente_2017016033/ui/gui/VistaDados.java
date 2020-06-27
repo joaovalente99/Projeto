@@ -30,7 +30,7 @@ public class VistaDados extends VBox {
         labelDados = new Label(modeloObs.toString());
         getChildren().addAll(labelDados);
         setSpacing(5);
-        setPadding(new Insets(10, 10, 10, 10));
+        setPadding(new Insets(5, 5, 5, 5));
         setAlignment(Pos.TOP_LEFT);
     }
 }

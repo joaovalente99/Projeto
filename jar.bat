@@ -1,0 +1,1 @@
+java -p "C:\Program Files\Java\javafx-sdk-14.0.1\lib" --add-modules javafx.controls,javafx.media -jar Projeto.jar

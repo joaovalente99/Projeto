@@ -6,14 +6,15 @@ import Tp_1920_JoaoValente_2017016033.logica.JogoMaqEstadosObservavel;
 import Tp_1920_JoaoValente_2017016033.resources.images.ImageLoader;
 import Tp_1920_JoaoValente_2017016033.resources.sounds.SoundLoader;
 import Tp_1920_JoaoValente_2017016033.ui.gui.interfaces.*;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.scene.control.*;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
@@ -97,20 +98,24 @@ public class Gui extends BorderPane {
         //Menu
         MenuBar menuBar = new MenuBar();
 
-        Menu fileMenu = new Menu("File");
-        MenuItem fileSave = new MenuItem("Save");
-        MenuItem fileLoad = new MenuItem("Load");
+        Menu fileMenu = new Menu("_File");
+        MenuItem fileSave = new MenuItem("_Save");
+        MenuItem fileLoad = new MenuItem("_Load");
         MenuItem fileExit = new MenuItem("Exit");
-        fileMenu.getItems().addAll(fileSave, fileLoad, fileExit);
+        fileLoad.setAccelerator(new KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN));
+        fileSave.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN));
+        fileMenu.getItems().addAll(fileSave, fileLoad, new SeparatorMenuItem(), fileExit);
+
 
 
         Menu aboutMenu = new Menu("About");
         MenuItem aboutInfo = new MenuItem("Info");
+        aboutInfo.setAccelerator(new KeyCodeCombination(KeyCode.A, KeyCombination.CONTROL_DOWN));
         aboutMenu.getItems().addAll(aboutInfo);
 
         Menu volumeMenu = new Menu("Volume");
         CustomMenuItem custom = new CustomMenuItem();
-        Slider slider = new Slider(0, 100, 50);
+        Slider slider = new Slider(0.1, 100, 50);
         slider.setOrientation(Orientation.VERTICAL);
         menuBar.getMenus().addAll(fileMenu, aboutMenu, volumeMenu);
         custom.setContent(slider);

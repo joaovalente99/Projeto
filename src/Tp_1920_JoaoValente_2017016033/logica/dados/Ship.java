@@ -468,6 +468,9 @@ public abstract class Ship implements Constantes, Serializable {
         str += "Fuel: " + fuel + "\n";
         str += "Shield: " + shield + "\n";
         str += "Nivel de Cargo Hold: " + cargoHoldLevel + "\n";
+        if(drone != null) {
+            str += "Drone Armor: " + drone.getArmor() + "\n";
+        }
         str += "\n" + "Numero de recursos:\n";
         str += "Black: " + black + "\n";
         str += "Blue: " + blue + "\n";
